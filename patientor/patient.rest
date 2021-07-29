@@ -1,0 +1,15 @@
+###
+
+POST http://localhost:3000/api/patients/
+Content-Type: application/json
+
+{
+    "name": "Ramiro Arivilca",
+    "dateOfBirth": "1995-12-09",
+    "ssn": "090786-222",
+    "gender": "male",
+    "occupation": "Full Stack developer"
+}
+
+###
+
