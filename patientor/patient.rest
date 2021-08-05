@@ -1,6 +1,11 @@
 ###
 
-POST http://localhost:3000/api/patients/
+GET http://localhost:3001/api/patients/d27736ec-f723-11e9-8f0b-362b9e155667
+
+
+###
+
+POST http://localhost:3001/api/patients/
 Content-Type: application/json
 
 {
@@ -9,6 +14,26 @@ Content-Type: application/json
     "ssn": "090786-222",
     "gender": "male",
     "occupation": "Full Stack developer"
+}
+
+###
+
+POST http://localhost:3001/api/patients/d2773336-f723-11e9-8f0b-362b9e155667/entries
+Content-Type: application/json
+
+{
+    "id": "fcd59fa6-c4b4-4fec-ac4d-df4fe1f85f62",
+    "date": "2019-08-05",
+    "type": "OccupationalHealthcare",
+    "specialist": "MD House",
+    "employerName": "HyPD",
+    "diagnosisCodes": ["Z57.1", "Z74.3", "M51.2"],
+    "description":
+        "Patient mistakenly found himself in a nuclear plant waste site without protection gear. Very minOR radiation poisoning. ",
+    "sickLeave": {
+        "startDate": "2019-08-05",
+        "endDate": "2019-08-28"
+    }
 }
 
 ###

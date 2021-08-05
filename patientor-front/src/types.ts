@@ -1,8 +1,29 @@
 
-type UnionOmit<T, K extends string | number | symbol> = T extends unknown ? Omit<T, K> : never;
+import { SemanticCOLORS } from "semantic-ui-react/dist/commonjs/generic";
+
+
+export type UnionOmit<T, K extends string | number | symbol> = T extends unknown ? Omit<T, K> : never;
+export interface Diagnosis {
+  code: string
+  name: string
+  latin?: string
+}
+
+
 export enum Gender {
   Male = 'male',
   Female = 'female',
+  Other = 'other',
+}
+
+export interface Patient {
+  id: string
+  name: string
+  occupation: string
+  gender: Gender
+  ssn?: string
+  dateOfBirth?: string
+  entries?: Entry[]
 }
 
 interface BaseEntry {
@@ -20,11 +41,11 @@ export enum HealthCheckRating {
   'CriticalRisk' = 3,
 }
 
-export interface HospitalCharge {
+interface HospitalCharge {
   date: string
   criteria: string
 }
-export interface OccupationalHealthSick {
+interface OccupationalHealthSick {
   startDate: string
   endDate: string
 }
@@ -36,37 +57,24 @@ export interface HealthCheckEntry extends BaseEntry {
 
 export interface HospitalEntry extends BaseEntry {
   type: 'Hospital'
-  discharge: HospitalCharge
+  discharge?: HospitalCharge
 }
 export interface OccupationalHealthcareEntry extends BaseEntry {
   type: 'OccupationalHealthcare'
   employerName: string
   sickLeave?: OccupationalHealthSick
 }
-
-export type Entry =
-  | HospitalEntry
-  | OccupationalHealthcareEntry
-  | HealthCheckEntry
-
-export interface Patient {
-  id: string
-  name: string
-  dateOfBirth: string
-  ssn: string
-  gender: Gender
-  occupation: string
-  entries: Entry[]
-}
-
 export interface Diagnoses {
   code: string
   name: string
   latin?: string
 }
 
-export type NewPatient = Omit<Patient, 'id'>
+export interface Color {
+    [id: number]: SemanticCOLORS
+}
 
-export type NewEntry = UnionOmit<Entry, 'id'>
-
-export type NonSensitivePacient = Omit<Patient, 'ssn' | 'entries'>
+export type Entry =
+  | HospitalEntry
+  | OccupationalHealthcareEntry
+  | HealthCheckEntry

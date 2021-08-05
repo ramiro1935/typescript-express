@@ -1,5 +1,5 @@
 import { v1 as uuid } from 'uuid'
-import { NewPatient, NonSensitivePacient, Patient } from "../../types"
+import {  NewEntry, NewPatient, NonSensitivePacient, Patient } from "../../types"
 import { data } from "../data/patients"
 
 const getAllPatients = (): NonSensitivePacient[] => {
@@ -10,7 +10,14 @@ const getAllPatients = (): NonSensitivePacient[] => {
         gender,
         occupation
     }))
-    
+}
+
+const getPatientById = (id: string): Patient | null => {
+    const patient = data.find(p => p.id === id)
+    if(patient){
+        return patient
+    }
+    return null
 }
 
 const createPatient = (object: NewPatient): Patient => {
@@ -21,8 +28,20 @@ const createPatient = (object: NewPatient): Patient => {
     data.push(newPatient)
     return newPatient
 }
+const createPatientEntry = (object: NewEntry, id: string): Patient => {
+    const patient = data.find(p => p.id === id)
+    if(!patient) throw new Error(`patient doesn't exist in database`)
+    const newEnty = {
+        id: uuid(),
+        ...object
+    }
+    patient.entries.push(newEnty)
+    return patient
+}
 
 export default {
     getAllPatients,
-    createPatient
+    getPatientById,
+    createPatient,
+    createPatientEntry
 }
